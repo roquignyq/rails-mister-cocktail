@@ -6,6 +6,8 @@
     <% @cocktail.doses.each do |dose| %>
     <li>
       <%= dose.ingredient.name %> - <%= dose.description %>
+      -
+      <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, cocktail_dose_path(@cocktail, dose), method: :delete, data: { confirm: "Are you sure to delete this dose?" }%>
     </li>
     <% end %>
   </ul>
@@ -22,4 +24,7 @@
     <% end %>
   </div>
 </div>
+
+
+
 
