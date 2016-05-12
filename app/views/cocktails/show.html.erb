@@ -1,2 +1,10 @@
-<h1>Cocktails#show</h1>
-<p>Find me in app/views/cocktails/show.html.erb</p>
+<div class="container">
+  <h1><%= @cocktail.name %></h2>
+  <ul>
+    <% @cocktail.ingredients.each do |ingredient| %>
+    <li>
+      <%= ingredient.name %>
+    </li>
+    <% end %>
+  </ul>
+</div>
