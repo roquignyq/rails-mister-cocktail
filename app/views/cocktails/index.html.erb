@@ -1,18 +1,26 @@
 <div class="container">
   <h1>See all cocktails</h1>
-  <ul class="list-unstyled">
-    <% @cocktails.each do |cocktail| %>
-    <li>
-      <h2><%= link_to cocktail.name, cocktail_path(cocktail) %></h2>
-      <ul>
+  <% @cocktails.each do |cocktail| %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <h2>
+        <%= link_to cocktail.name, cocktail_path(cocktail) %>
+      </h2>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <p>
+        <%= cocktail.ingredients.count %> ingredient(s) -
+        <a href="#" class="see-ingredients" id="cocktail_<%= cocktail.id %>"> (See them)</a>
+      </p>
+      <ul class="hidden" class="list-of-ingredients" id="list_ingredient_<%= cocktail.id %>">
         <% cocktail.ingredients.each do |ingredient| %>
         <li>
           <%= ingredient.name %>
         </li>
         <% end %>
       </ul>
-    </li>
-    <% end %>
-  </ul>
+    </div>
+  </div>
+  <hr>
+  <% end %>
 </div>
-
