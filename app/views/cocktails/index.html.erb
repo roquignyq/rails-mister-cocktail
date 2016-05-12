@@ -1,5 +1,6 @@
 <div class="container">
-  <h1>See all cocktails</h1>
+
+  <h1>See all <span style="color: #FF0000;"><%= @cocktails.count %></span> cocktails</h1>
   <% @cocktails.each do |cocktail| %>
   <div class="row">
     <div class="col-xs-12 col-sm-6">
