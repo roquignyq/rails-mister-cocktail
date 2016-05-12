@@ -1,10 +1,24 @@
 <div class="container">
   <h1><%= @cocktail.name %></h2>
   <ul>
-    <% @cocktail.ingredients.each do |ingredient| %>
+    <% @cocktail.doses.each do |dose| %>
     <li>
-      <%= ingredient.name %>
+      <%= dose.ingredient.name %> - <%= dose.description %>
     </li>
     <% end %>
   </ul>
 </div>
+
+
+<div class="review-background">
+  <div class="container padded" id="add_review">
+    <h4>Add a new dose</h4>
+    <%= simple_form_for([@cocktail, @dose], html: { class: 'form-horizontal' }) do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :description %>
+      <%= f.input :ingredient, collection: @ingredients, prompt: "Choose the ingredient" %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+</div>
+

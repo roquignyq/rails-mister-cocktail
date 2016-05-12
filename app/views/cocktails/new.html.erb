@@ -4,7 +4,6 @@
   <%= simple_form_for(@cocktail, html: { class: 'form-horizontal' }) do |f| %>
     <%= f.error_notification %>
     <%= f.input :name %>
-    <%= f.input :ingredients, collection: @ingredients, input_html: { class: 'multiselectuser', multiple: true} %>
     <%= f.button :submit %>
   <% end %>
 
