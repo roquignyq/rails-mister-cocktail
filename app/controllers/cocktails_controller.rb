@@ -1,6 +1,10 @@
 class CocktailsController < ApplicationController
   def index
-    @cocktails = Cocktail.all
+    if !params[:query]
+      @cocktails = Cocktail.all
+    else
+      @cocktails = Cocktail.search(params[:query])
+    end
   end
 
   def show
@@ -29,6 +33,6 @@ class CocktailsController < ApplicationController
 
   private
   def cocktail_params
-    params.require(:cocktail).permit(:name, :ingredients)
+    params.require(:cocktail).permit(:name, :ingredients, :photo, :photo_cache)
   end
 end

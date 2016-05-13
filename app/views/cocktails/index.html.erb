@@ -1,27 +1,46 @@
-<div class="container">
 
-  <h1>See all <span style="color: #FF0000;"><%= @cocktails.count %></span> cocktails</h1>
-  <% @cocktails.each do |cocktail| %>
-  <div class="row">
-    <div class="col-xs-12 col-sm-6">
-      <h2>
-        <%= link_to cocktail.name, cocktail_path(cocktail) %>
-      </h2>
-    </div>
-    <div class="col-xs-12 col-sm-6">
-      <p>
-        <%= cocktail.ingredients.count %> ingredient(s) -
-        <a href="#" class="see-ingredients" id="cocktail_<%= cocktail.id %>"> (See them)</a>
-      </p>
-      <ul class="hidden" class="list-of-ingredients" id="list_ingredient_<%= cocktail.id %>">
-        <% cocktail.ingredients.each do |ingredient| %>
-        <li>
-          <%= ingredient.name %>
-        </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  <hr>
+
+
+<div class="container">
+  <!-- Beginning of filter bar -->
+  <br>
+  <%= form_tag '', :method => :get do %>
+    <%= text_field_tag :query %>
+    <%= submit_tag 'Filter by name', class: "btn btn-danger" %>
   <% end %>
+  <!-- End of filter bar -->
+  <h1>See all <span style="color: #FF0000;"><%= @cocktails.count %></span> cocktails</h1>
+  <div class="row">
+    <% @cocktails.each do |cocktail| %>
+    <div class="col-xs-12 col-sm-4 col-md-3">
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+        <% if !cocktail.photo.model[:photo].nil? %>
+
+            url(<%= cl_image_path cocktail.photo, height: 300, width: 400, crop: :fill %>)
+          <% else %>
+            url('http://lorempixel.com/100/100/food/')
+          <% end %>
+      ;">
+        <div class="card-category">Popular</div>
+        <div class="card-description">
+          <h2><%= link_to cocktail.name, cocktail_path(cocktail) %></h2>
+          <p>
+            <%= cocktail.ingredients.count %> ingredient(s) -
+            <a href="#" class="see-ingredients" id="cocktail_<%= cocktail.id %>"> (See them)</a>
+          </p>
+          <ul class="hidden" class="list-of-ingredients" id="list_ingredient_<%= cocktail.id %>">
+            <% cocktail.ingredients.each do |ingredient| %>
+            <li>
+              <%= ingredient.name %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+        <img class="card-user avatar" src="http://lorempixel.com/150/150/people/">
+        <!-- <a class="card-link" href="#" ></a> -->
+        <% link_to cocktail_path(cocktail), class: "card-link" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
 </div>

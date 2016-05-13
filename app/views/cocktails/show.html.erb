@@ -1,6 +1,16 @@
-<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('http://lorempixel.com/900/900/food/');">
+<div class="banner"
+  style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),
+  <% if !@cocktail.photo.model[:photo].nil? %>
+
+    url(<%= cl_image_path @cocktail.photo, height: 300, width: 400, crop: :fill %>)
+  <% else %>
+    url('http://lorempixel.com/900/900/food/')
+  <% end %>
+  ;
+  "
+>
   <div class="banner-content">
-    <h1><%= @cocktail.name %></h1>
+    <h1 style="font-size: 1.2em;"><%= @cocktail.name %></h1>
     <p>
       <i class="fa fa-lemon-o" aria-hidden="true"></i>
       <%= @cocktail.ingredients.count %> ingredient(s)
@@ -12,9 +22,13 @@
   </div>
 </div>
 
+
+
+
 <div class="container">
   <h2><%= @cocktail.name %></h2>
-  <h3>Follow the doses:</h3>
+
+  <h4>Follow the doses:</h4>
 
   <ul>
     <% @cocktail.doses.each do |dose| %>
