@@ -6,4 +6,5 @@ class Cocktail < ActiveRecord::Base
 
   scope :search, ->(term) { where("name iLIKE ? ", "%#{term}%") }
 
+
 end
